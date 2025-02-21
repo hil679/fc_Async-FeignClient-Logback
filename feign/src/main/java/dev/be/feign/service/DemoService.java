@@ -26,4 +26,8 @@ public class DemoService {
         System.out.println("Name : " + response.getBody().getName());
         return "post";
     }
+    public String errorDecoder() {
+        demoFeignClient.callErrorDecoder();
+        return "errorDecoder";
+    }
 }
