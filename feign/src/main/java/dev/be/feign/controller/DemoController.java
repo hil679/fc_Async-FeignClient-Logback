@@ -20,7 +20,7 @@ public class DemoController {
     public String get() {
         return demoService.get();
     }
-    @GetMapping("/post")
+    @PostMapping("/post") //PostMapping이면 "curl -X POST http://localhost:8080/post" 로 test
     public String post() {
         return demoService.post();
     }
