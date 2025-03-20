@@ -1,0 +1,47 @@
+<included>
+<!--    properties file로 변수 빼기-->
+    <property resource="logback-variables.properties"/>
+
+    <appender name="REQUEST1" class="ch.qos.logback.core.rolling.RollingFileAppender"> <!--operating env에서는 console log필요 없음-->
+        <file>${LOG_DIR}/request1.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 지정한 시간이 지나면 i:순서를 지정해줌으로써 하나의 파일을 여러개로 쪼갠 다음에 압축하는 느낌 -->
+            <fileNamePattern>
+                ${LOG_DIR}/archive/request1.%d{yyyy-MM-dd}_%i.log
+            </fileNamePattern>
+            <maxFileSize>1KB</maxFileSize>
+            <maxHistory>30</maxHistory> <!--log파일 최대 보관 주기 ( 단위: 일 )-->
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                [REQUEST1] ${LOG_PATTERN}
+            </pattern>
+            <!-- file header에 어떤 패턴으로 출력하는지 노출해줌 -->
+            <outputPatternAsHeader>true</outputPatternAsHeader>
+        </encoder>
+    </appender>
+
+    <appender name="REQUEST2" class="ch.qos.logback.core.rolling.RollingFileAppender"> <!--operating env에서는 console log필요 없음-->
+        <file>${LOG_DIR}/request2.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 지정한 시간이 지나면 i:순서를 지정해줌으로써 하나의 파일을 여러개로 쪼갠 다음에 압축하는 느낌 -->
+            <fileNamePattern>
+                ${LOG_DIR}/archive/request2.%d{yyyy-MM-dd}_%i.log
+            </fileNamePattern>
+            <maxFileSize>10KB</maxFileSize>
+            <maxHistory>30</maxHistory> <!--log파일 최대 보관 주기 ( 단위: 일 )-->
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                [REQUEST2] ${LOG_PATTERN}
+            </pattern>
+            <!-- file header에 어떤 패턴으로 출력하는지 노출해줌 -->
+            <outputPatternAsHeader>true</outputPatternAsHeader>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="REQUEST1"/>
+        <appender-ref ref="REQUEST2"/>
+    </root>
+</included>
