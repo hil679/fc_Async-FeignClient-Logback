@@ -1,0 +1,17 @@
+#logback.classic pattern: [MDC] %X{job}%n
+[MDC] 
+[MDC] 
+[MDC] 
+[MDC] 
+[MDC] 
+[MDC] 
+[MDC] 
+[MDC] 
+[MDC] 
+[MDC] 
+[MDC] 
+[MDC] 
+[MDC] dev
+[MDC] dev
+[MDC] 
+[MDC] 

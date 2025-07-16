@@ -40,8 +40,29 @@
         </encoder>
     </appender>
 
+    <appender name="MDC" class="ch.qos.logback.core.rolling.RollingFileAppender"> <!--operating env에서는 console log필요 없음-->
+        <file>${LOG_DIR}/mdc.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 지정한 시간이 지나면 i:순서를 지정해줌으로써 하나의 파일을 여러개로 쪼갠 다음에 압축하는 느낌 -->
+            <fileNamePattern>
+                ${LOG_DIR}/archive/mdc.%d{yyyy-MM-dd}_%i.log
+            </fileNamePattern>
+            <maxFileSize>10KB</maxFileSize>
+            <maxHistory>30</maxHistory> <!--log파일 최대 보관 주기 ( 단위: 일 )-->
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+<!--                %X로 MDC안에 값 키(job)로 조회 가능-->
+                [MDC] %X{job}%n
+            </pattern>
+            <!-- file header에 어떤 패턴으로 출력하는지 노출해줌 -->
+            <outputPatternAsHeader>true</outputPatternAsHeader>
+        </encoder>
+    </appender>
+
     <root level="INFO">
         <appender-ref ref="REQUEST1"/>
         <appender-ref ref="REQUEST2"/>
+        <appender-ref ref="MDC"/>
     </root>
 </included>
